@@ -1,11 +1,8 @@
-from flask import Flask
+import os
+from api.routes import create_app
 
-app = Flask(__name__)
+app = create_app()
 
-@app.route('/')
-def home():
-    return 'Hello, World!'
-
-@app.route('/about')
-def about():
-    return 'About'
+if __name__ == "__main__":
+    if os.environ.get("VERCEL_ENV") != "production":
+        app.run(debug=True)
